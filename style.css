@@ -843,3 +843,271 @@ html, body {
         transform: scale(0) translateY(-50px);
     }
 }
+
+/* ==================== ONLINE MODE STYLES ==================== */
+.room-code-display {
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #4fc3f7;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+}
+
+.room-label {
+    font-size: 10px;
+    color: #81d4fa;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+#roomCodeDisplay {
+    font-size: 28px;
+    color: #ffd54f;
+    letter-spacing: 8px;
+    text-shadow: 0 0 10px #ffd54f, 0 0 20px #ffd54f;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+#roomCodeInput {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    padding: 15px 20px;
+    text-align: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #4fc3f7;
+    color: #fff;
+    border-radius: 10px;
+    width: 250px;
+    margin: 20px 0;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#roomCodeInput::placeholder {
+    color: #616161;
+    letter-spacing: 3px;
+}
+
+#roomCodeInput:focus {
+    border-color: #ffd54f;
+    box-shadow: 0 0 20px rgba(255, 213, 79, 0.5);
+}
+
+.error-msg {
+    font-size: 8px;
+    color: #ff6b6b;
+    min-height: 20px;
+    margin: 5px 0;
+    text-shadow: none;
+}
+
+/* ==================== PLAYERS STATUS ==================== */
+#playersStatus {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    min-width: 280px;
+    border: 2px solid #4fc3f7;
+}
+
+.player-status {
+    font-size: 10px;
+    color: #bdbdbd;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.player-ready {
+    color: #4caf50 !important;
+    background: rgba(76, 175, 80, 0.2) !important;
+    border-left: 4px solid #4caf50;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.player-waiting {
+    color: #ff9800 !important;
+    background: rgba(255, 152, 0, 0.2) !important;
+    border-left: 4px solid #ff9800;
+}
+
+/* ==================== COUNTDOWN ==================== */
+#countdownNumber {
+    font-size: 100px;
+    color: #ffd54f;
+    text-shadow: 
+        0 0 30px #ffd54f,
+        0 0 60px #ffd54f,
+        5px 5px 0 #000;
+    animation: countdown-pulse 1s ease-in-out infinite;
+}
+
+@keyframes countdown-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* ==================== CONNECTION STATUS ==================== */
+#connectionStatus {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #4fc3f7;
+    z-index: 1000;
+}
+
+/* ==================== LEADERBOARD STYLES ==================== */
+.leaderboard-list {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4fc3f7 rgba(0, 0, 0, 0.3);
+}
+
+.leaderboard-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.leaderboard-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.leaderboard-list::-webkit-scrollbar-thumb {
+    background: #4fc3f7;
+    border-radius: 4px;
+}
+
+.leaderboard-list::-webkit-scrollbar-thumb:hover {
+    background: #81d4fa;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border-left: 3px solid #4fc3f7;
+    transition: all 0.2s ease;
+}
+
+.leaderboard-item:hover {
+    background: rgba(79, 195, 247, 0.1);
+    transform: translateX(5px);
+}
+
+.leaderboard-item.gold {
+    border-left-color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.leaderboard-item.silver {
+    border-left-color: #c0c0c0;
+    background: rgba(192, 192, 192, 0.1);
+}
+
+.leaderboard-item.bronze {
+    border-left-color: #cd7f32;
+    background: rgba(205, 127, 50, 0.1);
+}
+
+/* ==================== ONLINE HUD ==================== */
+#onlineHud {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#myScoreOnline, #opponentScoreOnline {
+    font-size: 8px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+#myScoreOnline {
+    background: rgba(76, 175, 80, 0.8);
+    color: #fff;
+    border: 2px solid #4caf50;
+}
+
+#opponentScoreOnline {
+    background: rgba(244, 67, 54, 0.8);
+    color: #fff;
+    border: 2px solid #f44336;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ffd54f, 0 0 20px #ffd54f;
+    }
+    to {
+        text-shadow: 0 0 20px #ffd54f, 0 0 40px #ffd54f, 0 0 60px #ff9800;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+@media (max-width: 500px) {
+    .room-code-display {
+        padding: 15px 25px;
+    }
+    
+    #roomCodeDisplay {
+        font-size: 22px;
+        letter-spacing: 5px;
+    }
+    
+    #roomCodeInput {
+        font-size: 16px;
+        width: 220px;
+        padding: 12px 15px;
+    }
+    
+    #playersStatus {
+        min-width: 240px;
+    }
+    
+    #countdownNumber {
+        font-size: 80px;
+    }
+    
+    .leaderboard-item {
+        font-size: 8px;
+        padding: 8px 10px;
+    }
+}

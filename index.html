@@ -403,6 +403,11 @@
             #leftControlArea { order: -1; }
         }
     </style>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
     <div id="gameWrapper">
@@ -443,7 +448,9 @@
                 <div class="character-select" id="charSelect"></div>
                 
                 <button class="btn btn-play" id="startBtn">START GAME</button>
+                <button class="btn btn-secondary" id="onlineBtn">🌐 ONLINE</button>
                 <button class="btn btn-secondary btn-small" id="statsBtn">📊 STATS</button>
+                <button class="btn btn-small" id="leaderboardBtn">🏆 LEADERBOARD</button>
                 
                 <div class="instructions instructions-desktop">
                     ← → ARROW KEYS TO MOVE<br>
@@ -454,6 +461,91 @@
                     USE BUTTONS TO MOVE • HOLD TO RUN<br>
                     COLLECT 🪙 & POWERUPS • BUILD COMBOS!
                 </div>
+            </div>
+            
+            <!-- Online Menu Screen -->
+            <div id="onlineScreen" class="overlay hidden">
+                <div class="title">🌐 ONLINE MODE</div>
+                <div class="title-ar">وضع الأونلاين</div>
+                
+                <button class="btn btn-play" id="createRoomBtn">🏠 CREATE ROOM</button>
+                <button class="btn btn-play" id="joinRoomBtn">🚪 JOIN ROOM</button>
+                <button class="btn btn-secondary" id="quickMatchBtn">⚡ QUICK MATCH</button>
+                <button class="btn btn-small" id="backFromOnlineBtn">← BACK</button>
+                
+                <div id="connectionStatus" class="hidden" style="margin-top: 15px; font-size: 8px; color: #81d4fa;"></div>
+            </div>
+            
+            <!-- Waiting Room Screen -->
+            <div id="waitingScreen" class="overlay hidden">
+                <div class="title">🚪 WAITING ROOM</div>
+                
+                <div class="room-code-display">
+                    <div class="room-label">ROOM CODE:</div>
+                    <div id="roomCodeDisplay">------</div>
+                </div>
+                
+                <div id="playersStatus">
+                    <div id="player1Status" class="player-status player-waiting">👤 Player 1: Waiting...</div>
+                    <div id="player2Status" class="player-status player-waiting">👤 Player 2: Waiting...</div>
+                </div>
+                
+                <button class="btn btn-play" id="readyBtn">✅ READY</button>
+                <button class="btn btn-small" id="leaveRoomBtn">🚪 LEAVE</button>
+            </div>
+            
+            <!-- Join Room Screen -->
+            <div id="joinScreen" class="overlay hidden">
+                <div class="title">🚪 JOIN ROOM</div>
+                <div class="title-ar">انضم لغرفة</div>
+                
+                <input type="text" id="roomCodeInput" placeholder="ROOM CODE" maxlength="6" autocomplete="off">
+                <div class="error-msg" id="joinError"></div>
+                
+                <button class="btn btn-play" id="joinConfirmBtn">✅ JOIN</button>
+                <button class="btn btn-small" id="backFromJoinBtn">← BACK</button>
+            </div>
+            
+            <!-- Countdown Screen -->
+            <div id="countdownScreen" class="overlay hidden">
+                <div id="countdownNumber">3</div>
+            </div>
+            
+            <!-- Online Game Over Screen -->
+            <div id="onlineGameOverScreen" class="overlay hidden">
+                <div class="title" id="winnerTitle">GAME OVER</div>
+                <div class="score-display" style="font-size: 16px; margin: 20px 0;" id="winnerText"></div>
+                
+                <div style="display: flex; gap: 20px; justify-content: center; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 10px; color: #81d4fa; margin-bottom: 5px;">YOUR SCORE</div>
+                        <div style="font-size: 18px; color: #4caf50;" id="myFinalScore">0</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 10px; color: #81d4fa; margin-bottom: 5px;">OPPONENT</div>
+                        <div style="font-size: 18px; color: #f44336;" id="opponentFinalScore">0</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-play" id="playAgainBtn">PLAY AGAIN</button>
+                <button class="btn btn-small" id="backToMenuBtn">🏠 MENU</button>
+            </div>
+            
+            <!-- Leaderboard Screen -->
+            <div id="leaderboardScreen" class="overlay hidden">
+                <div class="title">🏆 LEADERBOARD</div>
+                <div class="title-ar">لوحة الصدارة</div>
+                
+                <div class="mode-selector" style="margin: 15px 0;">
+                    <div class="mode-btn selected" data-period="allTime">ALL TIME</div>
+                    <div class="mode-btn" data-period="weekly">WEEKLY</div>
+                    <div class="mode-btn" data-period="daily">DAILY</div>
+                </div>
+                
+                <div id="scoresList" style="width: 100%; max-width: 350px; max-height: 350px; overflow-y: auto; margin: 15px 0;"></div>
+                
+                <button class="btn btn-secondary btn-small" id="refreshLeaderboardBtn">🔄 REFRESH</button>
+                <button class="btn btn-small" id="backFromLeaderboardBtn">← BACK</button>
             </div>
             
             <!-- Stats Screen -->
@@ -1806,5 +1898,10 @@
         initPlatforms();
         requestAnimationFrame(gameLoop);
     </script>
+    
+    <!-- Firebase Multiplayer & Leaderboard -->
+    <script src="firebase-multiplayer.js"></script>
+    <script src="leaderboard.js"></script>
+    <script src="online-integration.js"></script>
 </body>
 </html>
